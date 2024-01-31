@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+}
+
+.numero-atual {
+    background: rgb(184, 102, 102);
+    height: 100px;
+    width: 100px;
+    margin-right: 5px;
+    border-radius: 50px;
+}
+
+.numero-anterior {
+    background: gray;
+    height: 100px;
+    width: 100px;
+    margin-left: 5px;
+    border-radius: 50px;
+
+}
+
+
+.base-cartela {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 100%;
+}
+
+.cartela {
+    display: grid;
+    grid-template-columns: 60px 60px 60px 60px 60px;
+    grid-gap: 1px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    height: 300px;
+}
