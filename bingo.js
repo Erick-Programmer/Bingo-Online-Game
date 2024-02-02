@@ -8,7 +8,7 @@
 
 //caso nao tenha saído nenhum numero - o espaço do numero anterior fica vazio. string = ""
 
-//vou ter 10 segundos pra marcar ou começa a outra rodada - aparecer o contador.
+    //vou ter 5 segundos pra marcar ou começa a outra rodada - aparecer o contador.
 
 //se eu clicar no numero da cartela que corresponde numero atual o botao fica inativo.
 ////mas se eu clicar no numero da cartela que não corresponde numero atual o botao fica normal
@@ -25,6 +25,7 @@
 // numero minimo = 1, se der zero, colocamos + 1.
 //numero maximo = 99, entao tem que usar 99 - 1, reaproveitar o + 1 pra quando zerar.
 var numeros = [];
+var numeroAtual = document.querySelector('#numero-sorteado');
 
 //numero atual e guardar o anterior.
 function sortearNumero() {
@@ -35,21 +36,51 @@ function sortearNumero() {
     return sortearNumero;
 }
 
-var numeroAtual = document.querySelector('#numero-sorteado');
-numeroAtual.textContent = sortearNumero();
+setTimeout(() => {
+    numeroAtual.textContent = sortearNumero();
+}, 3000);
 
-console.log(numeros);
-
-//ela ativa quando começa o jogo
+//cartela ativa quando começa o jogo
 
 function preencherCartela(){
     var cartela = Math.floor(Math.random() * (99 - 1)) + 1;   
     return cartela;
 }
 
+//preencher o botao com valor do random
 var posicao1 = document.getElementById("1");
 posicao1.value = preencherCartela();
 
-//aqui embaixo o laço while para rodar o jogo!
+//disabilitar o botao apos clicar.
+posicao1.addEventListener('click', marcado);
 
+function marcado(){
+    this.disabled = true;
+}
+
+//iniciar jogo
+function iniciarJogo() {
+    jogoRodando = true;
+    return jogoRodando;
+}
+
+var btnIniciar = document.getElementById('btnIniciar');
+btnIniciar.addEventListener('click', iniciarJogo);
+
+//parar jogo
+function pararJogo() {
+    jogoRodando = false;
+    return jogoRodando;
+}
+
+var btnParar = document.getElementById('btnParar');
+btnParar.addEventListener('click', pararJogo);
+
+
+//laço + flag.
+var jogoRodando = true;
+
+while(jogoRodando) {
+    setTimeOut(pararJogo(), 5000);
+}
 
