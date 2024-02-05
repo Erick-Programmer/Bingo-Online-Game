@@ -49,3 +49,22 @@ body {
     padding: 5px;
     height: 300px;
 }
+
+.controle {
+    display: flex;
+    justify-content: center;
+}
+
+#btnIniciar {
+    position: relative;
+    right: 5px;
+    border-radius: 20px;
+    background-color: greenyellow;
+}
+
+#btnParar {
+    position: relative;
+    left: 5px;
+    border-radius: 20px;
+    background-color: orangered;
+}
