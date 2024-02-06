@@ -17,51 +17,57 @@
 
 //numero 13 é um botao de desenho que nao serve pra nada (ele é inativo)
 
-//botao de iniciar começa o jogo - laço while - enquanto estiver executando - sai um numero - tempo pra marcar - somente encerra ao marcar toda cartela - break no laço.
+    //botao de iniciar começa o jogo - laço while - enquanto estiver executando - sai um numero - tempo pra marcar - somente encerra ao marcar toda cartela - break no laço.
 
 
-
-
-// numero minimo = 1, se der zero, colocamos + 1.
-//numero maximo = 99, entao tem que usar 99 - 1, reaproveitar o + 1 pra quando zerar.
-var numeros = [];
-var numeroAtual = document.querySelector('#numero-sorteado');
-
-//numero atual e guardar o anterior.
-function sortearNumero() {
-    var sortearNumero = Math.floor(Math.random() * (99 - 1)) + 1;   
-    
-    numeros.push(sortearNumero);
-
-    return sortearNumero;
-}
-
-setTimeout(() => {
-    numeroAtual.textContent = sortearNumero();
-}, 3000);
-
-//cartela ativa quando começa o jogo
-
+//PREENCHER CARTELA
 function preencherCartela(){
     var cartela = Math.floor(Math.random() * (99 - 1)) + 1;   
     return cartela;
 }
 
-//preencher o botao com valor do random
-var posicao1 = document.getElementById("1");
-posicao1.value = preencherCartela();
+var posicoes = 25;
+for (var i = 1; i <= posicoes; i++){
+    if(i == 13){
+        continue;
+    }
+    document.getElementById(i.toString()).value = preencherCartela();
 
-//disabilitar o botao apos clicar.
-posicao1.addEventListener('click', marcado);
+}
+//SORTEAR NUMERO
 
-function marcado(){
-    this.disabled = true;
+var numeros = [];
+var numeroAtual = document.querySelector('#numero-sorteado');
+
+function sortearNumero() {
+    var sortearNumero = Math.floor(Math.random() * (99 - 1)) + 1;   
+    numeros.push(sortearNumero);
+
+    return sortearNumero;
 }
 
-//iniciar jogo
+var rodadas = Number(prompt('Quantas rodadas?'));
+var rodada = rodadas.value;
+
+if (rodada == 0 || isNaN(rodada)){
+    alert('Preencha corretamente as rodadas');
+    
+}
+
+var turno = 1;
+
+while (turno <= rodada){
+    setTimeout(() => {
+        numeroAtual.textContent = sortearNumero();
+    }, 2000);
+
+    turno++;
+}
+
 function iniciarJogo() {
-    jogoRodando = true;
-    return jogoRodando;
+    setTimeout(() => {
+        numeroAtual.textContent = sortearNumero();
+    }, 2000);
 }
 
 var btnIniciar = document.getElementById('btnIniciar');
@@ -76,11 +82,26 @@ function pararJogo() {
 var btnParar = document.getElementById('btnParar');
 btnParar.addEventListener('click', pararJogo);
 
-
-//laço + flag.
-var jogoRodando = true;
-
-while(jogoRodando) {
-    setTimeOut(pararJogo(), 5000);
+//MARCAR NUMERO
+function marcado(){
+    this.disabled = true;  
 }
+
+function manterAtivo(){
+    this.disabled = false;
+}
+
+for (var i = 1; i <= posicoes; i++){
+    if(i == 13){
+        continue;
+    }
+    //VALIDAR O CLICK
+    if (numeroAtual.value == document.getElementById(i.toString()).value) {
+        document.getElementById(i.toString()).addEventListener('click', marcado);
+    } else {
+        document.getElementById(i.toString()).addEventListener('click', manterAtivo);
+    }
+    
+}
+
 
