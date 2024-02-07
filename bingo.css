@@ -31,6 +31,17 @@ body {
 
 }
 
+.definir-numero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.definir-numero input {
+    margin: 0.2rem;
+}
+
 
 .base-cartela {
     display: flex;

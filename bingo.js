@@ -37,33 +37,42 @@ for (var i = 1; i <= posicoes; i++){
 //SORTEAR NUMERO
 
 var numeros = [];
-var numeroAtual = document.querySelector('#numero-sorteado');
 
 function sortearNumero() {
     var sortearNumero = Math.floor(Math.random() * (99 - 1)) + 1;   
     numeros.push(sortearNumero);
-
     return sortearNumero;
 }
 
-var rodadas = Number(prompt('Quantas rodadas?'));
-var rodada = rodadas.value;
+//RODADAS
+var inRodadas = document.getElementById('inRodadas');
+var rodadas = inRodadas.value;
 
-if (rodada == 0 || isNaN(rodada)){
-    alert('Preencha corretamente as rodadas');
-    
+if (rodadas == 0 || isNaN(rodadas)) {
+    alert('preencha corretamente');
+    inRodadas.focus();
 }
 
 var turno = 1;
+var numeroAtual = document.querySelector('#numero-sorteado');
 
-while (turno <= rodada){
+do {
     setTimeout(() => {
         numeroAtual.textContent = sortearNumero();
     }, 2000);
 
-    turno++;
-}
+    turno += 1;
 
+    if(turno == rodadas){
+        flag = false
+    } else {
+        setTimeout(() => {
+            numeroAtual.textContent = sortearNumero();
+        }, 2000);
+    }
+
+} while(turno <= rodadas) 
+  
 function iniciarJogo() {
     setTimeout(() => {
         numeroAtual.textContent = sortearNumero();
@@ -104,4 +113,33 @@ for (var i = 1; i <= posicoes; i++){
     
 }
 
+
+
+function aa(number){
+        
+    console.log(number);
+
+    let nextNumber = number - 1;
+
+    if (nextNumber > 0) {
+        setTimeout(aa, 1000);
+    } else {
+        console.log('acabou');
+    }
+}   
+
+var flag = true;
+var t = 1;
+var r = 10;
+
+
+var array = new Array();
+for(t; t <= r;t++){
+    array.push(t);
+}
+
+console.log(array);
+//deu 2 segundos de intervalo soltou o while.
+
+aa(3);
 
