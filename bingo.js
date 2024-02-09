@@ -35,61 +35,67 @@ for (var i = 1; i <= posicoes; i++){
 
 }
 //SORTEAR NUMERO
-
-var numeros = [];
-
-function sortearNumero() {
-    var sortearNumero = Math.floor(Math.random() * (99 - 1)) + 1;   
-    numeros.push(sortearNumero);
-    return sortearNumero;
-}
-
-//RODADAS
-var inRodadas = document.getElementById('inRodadas');
-var rodadas = inRodadas.value;
-
-if (rodadas == 0 || isNaN(rodadas)) {
-    alert('preencha corretamente');
-    inRodadas.focus();
-}
-
-var turno = 1;
+var btnRodadas = document.querySelector('#btnRodadas');
+var inRodadas = document.querySelector('#inRodadas');
 var numeroAtual = document.querySelector('#numero-sorteado');
+var numeros = [];
+var rodadas = inRodadas.value;
+var round = rodadas*(-1);
 
-do {
-    setTimeout(() => {
-        numeroAtual.textContent = sortearNumero();
-    }, 2000);
+function sorteio() {
 
-    turno += 1;
+    var rodadas = inRodadas.value;
 
-    if(turno == rodadas){
-        flag = false
-    } else {
-        setTimeout(() => {
-            numeroAtual.textContent = sortearNumero();
-        }, 2000);
+    if (rodadas == 0 || isNaN(rodadas)){
+        alert('preencha corretamente');
+        inRodadas.focus();
+        return;
     }
 
-} while(turno <= rodadas) 
-  
-function iniciarJogo() {
-    setTimeout(() => {
-        numeroAtual.textContent = sortearNumero();
-    }, 2000);
+    sortearNumero();
+
 }
 
-var btnIniciar = document.getElementById('btnIniciar');
-btnIniciar.addEventListener('click', iniciarJogo);
+btnRodadas.addEventListener('click', sorteio);
 
-//parar jogo
-function pararJogo() {
-    jogoRodando = false;
-    return jogoRodando;
+function sortearNumero() {
+    rodadas--;
+    console.log(rodadas);
+
+    var intervalo = setInterval( function () {
+        var numeroSorteado = Math.floor(Math.random() * (99 - 1)) + 1;
+        numeroAtual.textContent = numeroSorteado;
+
+        if(rodadas == round){
+            clearInterval(intervalo);
+        } else {
+            setInterval(sortearNumero, 5000)
+            
+        }
+    
+    
+    }, 5000);  
+
 }
 
-var btnParar = document.getElementById('btnParar');
-btnParar.addEventListener('click', pararJogo);
+// function correr() {
+//     var  intervalo = setInterval(()=>{
+//         for(var i = 0; i < 10; i++){
+//             console.log('a');
+//             a = 10;
+//         }
+//         if (a == 10) {
+//             clearInterval(intervalo);
+//         }else {
+//             correr();
+//         }
+        
+//     },4000)
+    
+// }
+
+// correr();
+
 
 //MARCAR NUMERO
 function marcado(){
@@ -113,25 +119,9 @@ for (var i = 1; i <= posicoes; i++){
     
 }
 
-
-
-function aa(number){
-        
-    console.log(number);
-
-    let nextNumber = number - 1;
-
-    if (nextNumber > 0) {
-        setTimeout(aa, 1000);
-    } else {
-        console.log('acabou');
-    }
-}   
-
 var flag = true;
 var t = 1;
 var r = 10;
-
 
 var array = new Array();
 for(t; t <= r;t++){
@@ -139,7 +129,9 @@ for(t; t <= r;t++){
 }
 
 console.log(array);
-//deu 2 segundos de intervalo soltou o while.
 
-aa(3);
+
+//recursividade
+
+//60 vezes vai lançar um numero
 
