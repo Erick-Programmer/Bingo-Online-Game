@@ -1,26 +1,3 @@
-    //definir o numero aleatorio
-    //numero aleatorio entre 1 e 99: função random!
-
-    //preencher os numeros da cartela função random!
-    //sair um numero atual função random! ok!
-
-    //ao sair o numero atual - aparece no visor!  
-
-//caso nao tenha saído nenhum numero - o espaço do numero anterior fica vazio. string = ""
-
-    //vou ter 5 segundos pra marcar ou começa a outra rodada - aparecer o contador.
-
-//se eu clicar no numero da cartela que corresponde numero atual o botao fica inativo.
-////mas se eu clicar no numero da cartela que não corresponde numero atual o botao fica normal
-
-//ao preencher toda a cartela ganha o jogo - break no laço while - aparece vitoria (gera uma div com vitoria e permanece ate atualizar a pagina ou iniciar novamente o jogo)
-
-//numero 13 é um botao de desenho que nao serve pra nada (ele é inativo)
-
-    //botao de iniciar começa o jogo - laço while - enquanto estiver executando - sai um numero - tempo pra marcar - somente encerra ao marcar toda cartela - break no laço.
-
-
-//PREENCHER CARTELA
 function preencherCartela(){
     var cartela = Math.floor(Math.random() * (99 - 1)) + 1;   
     return cartela;
@@ -34,68 +11,77 @@ for (var i = 1; i <= posicoes; i++){
     document.getElementById(i.toString()).value = preencherCartela();
 
 }
+
 //SORTEAR NUMERO
 var btnRodadas = document.querySelector('#btnRodadas');
-var inRodadas = document.querySelector('#inRodadas');
+
 var numeroAtual = document.querySelector('#numero-sorteado');
-var numeros = [];
-var rodadas = inRodadas.value;
-var round = rodadas*(-1);
+var inRodadas = document.querySelector('#inRodadas');
 
-function sorteio() {
+//array de numeros sorteados
+var numerosSorteados = [];
 
+function sortearNumeros() {
+    //referencia
     var rodadas = inRodadas.value;
 
+    //analisar numero de rodadas
     if (rodadas == 0 || isNaN(rodadas)){
         alert('preencha corretamente');
         inRodadas.focus();
         return;
     }
 
-    sortearNumero();
+    //numeros sorteados
+
+    for(var i = 0; i < rodadas; i++){
+        var numeros = Math.floor(Math.random() * (99 - 1)) + 1;
+
+        numerosSorteados.push(numeros);
+
+    }
+
+    console.log(numerosSorteados);
 
 }
 
-btnRodadas.addEventListener('click', sorteio);
+btnRodadas.addEventListener('click', sortearNumeros);
 
-function sortearNumero() {
-    rodadas--;
-    console.log(rodadas);
+//INICIAR JOGO.
+var roundRecursivo = 0;
+var tempoRodada = 3000;
 
-    var intervalo = setInterval( function () {
-        var numeroSorteado = Math.floor(Math.random() * (99 - 1)) + 1;
-        numeroAtual.textContent = numeroSorteado;
+function comecarJogo() {
+    //rodadas
+    var rodadas = inRodadas.value;
 
-        if(rodadas == round){
+    var intervalo = setInterval(() => {
+        numeroAtual.textContent = numerosSorteados[roundRecursivo];
+
+        console.log(roundRecursivo);
+
+        if (roundRecursivo >= rodadas){
             clearInterval(intervalo);
-        } else {
-            setInterval(sortearNumero, 5000)
-            
+        }else {    
+            roundRecursivo = roundRecursivo + 1;
+            setTimeout(comecarJogo, tempoRodada);
         }
-    
-    
-    }, 5000);  
 
+
+    }, tempoRodada);
+        
 }
 
-// function correr() {
-//     var  intervalo = setInterval(()=>{
-//         for(var i = 0; i < 10; i++){
-//             console.log('a');
-//             a = 10;
-//         }
-//         if (a == 10) {
-//             clearInterval(intervalo);
-//         }else {
-//             correr();
-//         }
-        
-//     },4000)
-    
-// }
+var btnIniciar = document.getElementById('btnIniciar');
+btnIniciar.addEventListener('click', comecarJogo);
 
-// correr();
+//PARAR JOGO
+const pararJogo = () => {
+    clearInterval(intervalo);
+}
 
+var btnParar = document.getElementById('btnParar');
+btnParar.addEventListener('click', pararJogo);
 
 //MARCAR NUMERO
 function marcado(){
@@ -116,22 +102,5 @@ for (var i = 1; i <= posicoes; i++){
     } else {
         document.getElementById(i.toString()).addEventListener('click', manterAtivo);
     }
-    
+
 }
-
-var flag = true;
-var t = 1;
-var r = 10;
-
-var array = new Array();
-for(t; t <= r;t++){
-    array.push(t);
-}
-
-console.log(array);
-
-
-//recursividade
-
-//60 vezes vai lançar um numero
-
