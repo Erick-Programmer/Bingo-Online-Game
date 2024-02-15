@@ -26,8 +26,8 @@ function sortearNumeros() {
     var rodadas = inRodadas.value;
 
     //analisar numero de rodadas
-    if (rodadas == 0 || isNaN(rodadas)){
-        alert('preencha corretamente');
+    if (rodadas == 0 || isNaN(rodadas) || rodadas >= 50){
+        alert('Determine um valor de até 50 rodadas!');
         inRodadas.focus();
         return;
     }
@@ -49,13 +49,13 @@ btnRodadas.addEventListener('click', sortearNumeros);
 
 //INICIAR JOGO.
 var roundRecursivo = 0;
-var tempoRodada = 3000;
+var tempoRodada = 4000;
 
 function comecarJogo() {
     //rodadas
     var rodadas = inRodadas.value;
 
-    var intervalo = setInterval(() => {
+    var intervalo = setTimeout(() => {
         numeroAtual.textContent = numerosSorteados[roundRecursivo];
 
         console.log(roundRecursivo);
@@ -63,25 +63,36 @@ function comecarJogo() {
         if (roundRecursivo >= rodadas){
             clearInterval(intervalo);
         }else {    
-            roundRecursivo = roundRecursivo + 1;
+            roundRecursivo += 1;
             setTimeout(comecarJogo, tempoRodada);
         }
 
 
-    }, tempoRodada);
+    }, 1000);
         
 }
 
 var btnIniciar = document.getElementById('btnIniciar');
 btnIniciar.addEventListener('click', comecarJogo);
 
-//PARAR JOGO
+//PARAR JOGO (zerar o array ou reload na pagina)
 const pararJogo = () => {
-    clearInterval(intervalo);
+    for(var x in numerosSorteados){
+        numerosSorteados[x] = undefined;
+        location.reload();
+    }
+    console.log(numerosSorteados);
+    return numerosSorteados;
 }
 
 var btnParar = document.getElementById('btnParar');
 btnParar.addEventListener('click', pararJogo);
+
+//REFLETIR NUMERO ANTERIOR
+var numeroPassado = document.querySelector('#numero-passado');
+if(numeroAtual.value > 0) {
+    numeroPassado.textContent = 2;
+}
 
 //MARCAR NUMERO
 function marcado(){
