@@ -1,3 +1,4 @@
+//PREENCHER NUMEROS DA CARTELA
 function preencherCartela(){
     var cartela = Math.floor(Math.random() * (99 - 1)) + 1;   
     return cartela;
@@ -14,8 +15,6 @@ for (var i = 1; i <= posicoes; i++){
 
 //SORTEAR NUMERO
 var btnRodadas = document.querySelector('#btnRodadas');
-
-var numeroAtual = document.querySelector('#numero-sorteado');
 var inRodadas = document.querySelector('#inRodadas');
 
 //array de numeros sorteados
@@ -47,9 +46,43 @@ function sortearNumeros() {
 
 btnRodadas.addEventListener('click', sortearNumeros);
 
+//REFLETIR NUMERO ANTERIOR
+var numeroPassado = document.querySelector('#numero-passado'); //REFLETIR NUMERO PASSADOok!
+
+function espelharNumero(){
+    for(var i = 1; i <= numerosSorteados.length;i++){
+        if(numerosSorteados[i] == numeroAtual.textContent){
+            numeroPassado.textContent = numerosSorteados[i-1];
+        }
+    }
+}
+
+//DEFINIR TEMPO
+var inTempo = document.getElementById('inTempo');
+var tempoRodada; //USUÁRIO ESCOLHE O TEMPO MÁXIMO 10 SEGUNDOS!ok
+
+function relogio(){
+    var tempo = inTempo.value;
+
+    if(tempo == "" || tempo == 0 || tempo < 5 || tempo > 10 ){
+        alert('Defina um tempo de 5 a 10 segundos');
+        inTempo.focus();
+        return;
+    }
+
+    tempoRodada = tempo * 1000;  
+
+    console.log(tempoRodada);
+    
+}
+
+var btnTempo = document.getElementById('btnTempo');
+btnTempo.addEventListener('click', relogio);
+
 //INICIAR JOGO.
+var numeroAtual = document.querySelector('#numero-sorteado');
+
 var roundRecursivo = 0;
-var tempoRodada = 4000;
 
 function comecarJogo() {
     //rodadas
@@ -62,9 +95,11 @@ function comecarJogo() {
 
         if (roundRecursivo >= rodadas){
             clearInterval(intervalo);
+
         }else {    
             roundRecursivo += 1;
             setTimeout(comecarJogo, tempoRodada);
+            espelharNumero();
         }
 
 
@@ -73,30 +108,25 @@ function comecarJogo() {
 }
 
 var btnIniciar = document.getElementById('btnIniciar');
+
 btnIniciar.addEventListener('click', comecarJogo);
 
 //PARAR JOGO (zerar o array ou reload na pagina)
-const pararJogo = () => {
-    for(var x in numerosSorteados){
-        numerosSorteados[x] = undefined;
-        location.reload();
-    }
-    console.log(numerosSorteados);
+const pararJogo = () => {   //PARA CADA RODADA O ARRAY FICAR VAZIO!ok!
+    numerosSorteados = [];
+    numeroAtual.textContent = "";
+    numeroPassado.textContent = "";
+    inTempo.value = "";
+    inRodadas.value = "";
     return numerosSorteados;
 }
 
 var btnParar = document.getElementById('btnParar');
 btnParar.addEventListener('click', pararJogo);
 
-//REFLETIR NUMERO ANTERIOR
-var numeroPassado = document.querySelector('#numero-passado');
-if(numeroAtual.value > 0) {
-    numeroPassado.textContent = 2;
-}
-
 //MARCAR NUMERO
-function marcado(){
-    this.disabled = true;  
+function marcado(){ //PRECISAMOS QUE CADA VALOR CORRESPONDA COM ATUAL OU PASSADO E AO CLICAR FIQUE OUTRA COR
+    this.disabled = true;  //AO FICAR COM OUTRA COR SE PREENCHER TODO VENCERÁ!
 }
 
 function manterAtivo(){

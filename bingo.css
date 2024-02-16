@@ -44,6 +44,21 @@ body {
     margin: 0.2rem;
 }
 
+.definir-tempo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.definir-tempo input {
+    margin: 0.5rem;
+}
+
+#btnTempo {
+    position: relative;
+    right: 4px;
+}
 
 .base-cartela {
     display: flex;
