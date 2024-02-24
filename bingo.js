@@ -1,17 +1,58 @@
-//PREENCHER NUMEROS DA CARTELA
-function preencherCartela(){
-    var cartela = Math.floor(Math.random() * (99 - 1)) + 1;   
-    return cartela;
-}
+//PREENCHER NUMEROS DA CARTELA (ORDENAR A CARTELA**)
+const array = [];
+const _cartela = [];
 
-var posicoes = 25;
-for (var i = 1; i <= posicoes; i++){
-    if(i == 13){
-        continue;
+const preencherCartela = () => {
+    let posicoes = 50;
+
+    for (var i = 1; i <= posicoes; i++){
+        if(i === 1){
+            array.push(Math.floor(Math.random() * (99 - 1)) + 1);  
+            continue;
+        }
+
+        array.push(Math.floor(Math.random() * (99 - 1)) + 1); 
+        array.sort();
+
+        if(array[i] === array[i - 1]){
+            array.pop();
+            array.push(Math.floor(Math.random() * (99 - 1)) + 1); 
+            continue;
+        } 
     }
-    document.getElementById(i.toString()).value = preencherCartela();
+
+    //improviso.
+    for(var i = 1; i <= array.length; i++){
+        if(i == 1){
+            _cartela.push(array[i]);
+            continue;
+        } else if (array[i] === array[i - 1]){
+            continue;                
+        } else {
+            _cartela.push(array[i]);
+        }
+    }
+    
+    _cartela.sort((a,b) => a - b);
+
+    for (var i = 1; i <= _cartela.length; i++){
+         if(i == 13){
+             continue;
+         } else if (i == 26){
+             break;
+         } else {
+            document.getElementById(i.toString()).value = _cartela[i]; 
+         }
+
+    }
 
 }
+   
+preencherCartela(array);
+
+console.log(array);
+console.log(_cartela);
+
 
 //SORTEAR NUMERO
 var btnRodadas = document.querySelector('#btnRodadas');
@@ -126,14 +167,15 @@ btnParar.addEventListener('click', pararJogo);
 
 //MARCAR NUMERO
 function marcado(){ //PRECISAMOS QUE CADA VALOR CORRESPONDA COM ATUAL OU PASSADO E AO CLICAR FIQUE OUTRA COR
-    this.disabled = true;  //AO FICAR COM OUTRA COR SE PREENCHER TODO VENCERÁ!
+    this.className = 'numero';  //AO FICAR COM OUTRA COR SE PREENCHER TODO VENCERÁ!
 }
 
 function manterAtivo(){
     this.disabled = false;
 }
 
-for (var i = 1; i <= posicoes; i++){
+var _numeros = 25;
+for (var i = 1; i <= _numeros; i++){
     if(i == 13){
         continue;
     }
@@ -145,3 +187,4 @@ for (var i = 1; i <= posicoes; i++){
     }
 
 }
+
