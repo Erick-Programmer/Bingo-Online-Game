@@ -1,4 +1,4 @@
-//PREENCHER NUMEROS DA CARTELA (ORDENAR A CARTELA**)
+//PREENCHER NUMEROS DA CARTELA.
 const array = [];
 const _cartela = [];
 
@@ -32,7 +32,7 @@ const preencherCartela = () => {
             _cartela.push(array[i]);
         }
     }
-    
+
     _cartela.sort((a,b) => a - b);
 
     for (var i = 1; i <= _cartela.length; i++){
@@ -53,7 +53,6 @@ preencherCartela(array);
 console.log(array);
 console.log(_cartela);
 
-
 //SORTEAR NUMERO
 var btnRodadas = document.querySelector('#btnRodadas');
 var inRodadas = document.querySelector('#inRodadas');
@@ -73,7 +72,6 @@ function sortearNumeros() {
     }
 
     //numeros sorteados
-
     for(var i = 0; i < rodadas; i++){
         var numeros = Math.floor(Math.random() * (99 - 1)) + 1;
 
@@ -166,9 +164,21 @@ var btnParar = document.getElementById('btnParar');
 btnParar.addEventListener('click', pararJogo);
 
 //MARCAR NUMERO
-function marcado(){ //PRECISAMOS QUE CADA VALOR CORRESPONDA COM ATUAL OU PASSADO E AO CLICAR FIQUE OUTRA COR
-    this.className = 'numero';  //AO FICAR COM OUTRA COR SE PREENCHER TODO VENCERÁ!
+function marcado(){ //PRECISAMOS QUE CADA VALOR CORRESPONDA COM ATUAL OU PASSADO E AO CLICAR FIQUE OUTRA COR**
+    for(var i = 1; i <= _cartela.length; i++){
+        if(_cartela[i] == numeroAtual.textContent || _cartela[i] == numeroPassado.textContent){
+            console.log(document.getElementById(i.toString().value));
+        }
+    }
 }
+
+marcado();
+
+btnIniciar.addEventListener('click', () => {
+    setTimeout(() => {
+        
+    },tempoRodada)
+})
 
 function manterAtivo(){
     this.disabled = false;
