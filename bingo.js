@@ -115,13 +115,15 @@ function relogio(){
 var btnTempo = document.getElementById('btnTempo');
 btnTempo.addEventListener('click', relogio);
 
-//Iniciar Jogo.
+//Iniciar Jogo e chama a função que marca botão!
 var numeroAtual = document.querySelector('#numero-sorteado');
 
 var roundRecursivo = 0;
 
 function comecarJogo() {
     //rodadas
+    marcado();
+
     var rodadas = inRodadas.value;
 
     var intervalo = setTimeout(() => {
@@ -162,24 +164,153 @@ var btnParar = document.getElementById('btnParar');
 btnParar.addEventListener('click', pararJogo);
 
 
-//Marcar Número da Rodada.
+//Marcar Número da Rodada (função roda quando a função ComeçarJogo é acionada)
 function marcado() {
-    let numeros = 25;
+    let totalBtn = 25;
 
-    for (let i = 1; i <= numeros; i++) {
-        if(i == 13) {
+    for (var i = 1; i <= totalBtn; i++){
+        if(i == 13){
             continue;
-        } else if (numeroAtual.textContent != document.getElementById(i.toString()).value) {
-            console.log('aaaa');
+        } else if (document.getElementById(i.toString()).value == numeroAtual.value) {
+            console.log('aaa');
+            document.getElementById(i.toString()).addEventListener('click', (e) => {
+                e.target.className = 'numero';
+            })
+            
         }
-    } 
 
+   }
+    // switch(numeroAtual.value != ""){
+    //     case document.getElementById('1').value != numeroAtual.value:
+    //         console.log('aaa');
+    //         document.getElementById('1').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('2').value == numeroAtual.value:
+    //         document.getElementById('2').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('3').value == numeroAtual.value:
+    //         document.getElementById('3').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('4').value == numeroAtual.value:
+    //         document.getElementById('4').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('5').value == numeroAtual.value:
+    //         document.getElementById('5').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('6').value == numeroAtual.value:
+    //         document.getElementById('6').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('7').value == numeroAtual.value:
+    //         console.log('aaa');
+    //         document.getElementById('7').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('8').value == numeroAtual.value:
+    //         document.getElementById('8').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('9').value == numeroAtual.value:
+    //         document.getElementById('9').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('10').value == numeroAtual.value:
+    //         document.getElementById('10').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('11').value == numeroAtual.value:
+    //         document.getElementById('11').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('12').value == numeroAtual.value:
+    //         document.getElementById('12').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;    
+    //     case document.getElementById('13').value == numeroAtual.value:
+    //         console.log('aaa');
+    //         document.getElementById('13').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('14').value == numeroAtual.value:
+    //         document.getElementById('14').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('15').value == numeroAtual.value:
+    //         document.getElementById('15').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('16').value == numeroAtual.value:
+    //         document.getElementById('16').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('17').value == numeroAtual.value:
+    //         document.getElementById('17').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('18').value == numeroAtual.value:
+    //         document.getElementById('18').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('19').value == numeroAtual.value:
+    //         console.log('aaa');
+    //         document.getElementById('19').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('20').value == numeroAtual.value:
+    //         document.getElementById('20').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('21').value == numeroAtual.value:
+    //         document.getElementById('21').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('22').value == numeroAtual.value:
+    //         document.getElementById('22').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('23').value == numeroAtual.value:
+    //         document.getElementById('23').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break;
+    //     case document.getElementById('24').value == numeroAtual.value:
+    //         document.getElementById('24').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break; 
+    //     case document.getElementById('25').value == numeroAtual.value:
+    //         document.getElementById('25').addEventListener('click', (e) => {
+    //             e.target.className = 'numero';
+    //         })
+    //         break; 
+    // }
 }
 
-while (numeroAtual.textContent != "") {
-    marcado();
-}
-
-function manterAtivo(){
-    this.disabled = false;
-}
+marcado();
