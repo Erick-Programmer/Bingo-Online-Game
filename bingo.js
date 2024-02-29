@@ -164,14 +164,16 @@ var btnParar = document.getElementById('btnParar');
 btnParar.addEventListener('click', pararJogo);
 
 
-//Marcar Número da Rodada (função roda quando a função ComeçarJogo é acionada)
+//Marcar Número da Rodada (função roda quando a função ComeçarJogo é acionada) *****
+//Controlar o tempo para a função marcar esta em atraso! tanto para marcar quanto para ganhar!
 function marcado() {
     let totalBtn = 25;
 
     for (var i = 1; i <= totalBtn; i++){
         if(i == 13){
             continue;
-        } else if (document.getElementById(i.toString()).value == numeroAtual.value) {
+        } else if (Number(document.getElementById(i.toString()).value) == numeroAtual.textContent ||
+             (Number(document.getElementById(i.toString()).value) == numeroPassado.textContent)) {
             console.log('aaa');
             document.getElementById(i.toString()).addEventListener('click', (e) => {
                 e.target.className = 'numero';
@@ -180,6 +182,35 @@ function marcado() {
         }
 
    }
+   
+    if (document.getElementById('1').classList.value == 'numero' &&
+        document.getElementById('2').classList.value == 'numero' &&
+        document.getElementById('3').classList.value == 'numero' &&
+        document.getElementById('4').classList.value == 'numero' &&
+        document.getElementById('5').classList.value == 'numero' &&
+        document.getElementById('6').classList.value == 'numero' &&
+        document.getElementById('7').classList.value == 'numero' &&
+        document.getElementById('8').classList.value == 'numero' &&
+        document.getElementById('9').classList.value == 'numero' &&
+        document.getElementById('10').classList.value == 'numero' &&
+        document.getElementById('11').classList.value == 'numero' &&
+        document.getElementById('12').classList.value == 'numero' &&
+        document.getElementById('14').classList.value == 'numero' &&
+        document.getElementById('15').classList.value == 'numero' &&
+        document.getElementById('16').classList.value == 'numero' &&
+        document.getElementById('17').classList.value == 'numero' &&
+        document.getElementById('18').classList.value == 'numero' &&
+        document.getElementById('19').classList.value == 'numero' &&
+        document.getElementById('20').classList.value == 'numero' &&
+        document.getElementById('21').classList.value == 'numero' &&
+        document.getElementById('22').classList.value == 'numero' &&
+        document.getElementById('23').classList.value == 'numero' &&
+        document.getElementById('24').classList.value == 'numero' &&
+        document.getElementById('25').classList.value == 'numero') {
+        console.log('voce ganhou');
+    }
+
+
     // switch(numeroAtual.value != ""){
     //     case document.getElementById('1').value != numeroAtual.value:
     //         console.log('aaa');
